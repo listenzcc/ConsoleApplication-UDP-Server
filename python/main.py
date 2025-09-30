@@ -29,7 +29,7 @@ from datetime import datetime
 
 # %%
 host = 'localhost'
-port = 12345
+port = 5174
 
 logger = loguru.logger
 
@@ -72,6 +72,13 @@ def on_key_event(event):
 
     # 发送按键信息
     message = f"KEY:{key_info['event_type']}:{key_info['name']}:{key_info['scan_code']} [{now}]"
+
+    import random
+    import time
+    evts = ['1', '2']
+    random.shuffle(evts)
+    message = f'{evts[0]},{int(time.time())}'
+
     my_udp_client.send(message)
     return
 
